@@ -16,6 +16,7 @@ interface PlayerState {
   currentTime: number
   duration: number
   volume: number
+  expanded: boolean
 }
 
 interface PlayerContextValue extends PlayerState {
@@ -26,6 +27,8 @@ interface PlayerContextValue extends PlayerState {
   skip: (delta: number) => void
   setVolume: (v: number) => void
   close: () => void
+  expand: () => void
+  collapse: () => void
   audioRef: React.RefObject<HTMLAudioElement>
 }
 
@@ -38,6 +41,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const [volume, setVolumeState] = useState(1)
+  const [expanded, setExpanded] = useState(false)
 
   useEffect(() => {
     const audio = audioRef.current
@@ -66,6 +70,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     if (!audio) return
     if (current?.id === m.id) {
       audio.play().catch(() => {})
+      setExpanded(true)
       return
     }
     setCurrent(m)
@@ -74,6 +79,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     audio.src = m.url_audio
     audio.load()
     audio.play().catch(() => {})
+    setExpanded(true)
   }, [current?.id])
 
   const toggle = useCallback(() => {
@@ -118,12 +124,17 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     setIsPlaying(false)
     setCurrentTime(0)
     setDuration(0)
+    setExpanded(false)
   }, [])
 
+  const expand = useCallback(() => setExpanded(true), [])
+  const collapse = useCallback(() => setExpanded(false), [])
+
   const value = useMemo<PlayerContextValue>(() => ({
-    current, isPlaying, currentTime, duration, volume,
-    play, toggle, pause, seek, skip, setVolume, close, audioRef,
-  }), [current, isPlaying, currentTime, duration, volume, play, toggle, pause, seek, skip, setVolume, close])
+    current, isPlaying, currentTime, duration, volume, expanded,
+    play, toggle, pause, seek, skip, setVolume, close, expand, collapse, audioRef,
+  }), [current, isPlaying, currentTime, duration, volume, expanded,
+      play, toggle, pause, seek, skip, setVolume, close, expand, collapse])
 
   return (
     <PlayerContext.Provider value={value}>

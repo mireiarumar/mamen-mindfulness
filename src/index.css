@@ -60,6 +60,40 @@ h1, h2, h3, h4 {
   animation: fade-in 240ms ease-out both;
 }
 
+/* Animaciones de respiración: lentas, simétricas, calmantes */
+@keyframes breathe {
+  0%, 100% { transform: scale(0.85); }
+  50%      { transform: scale(1.10); }
+}
+
+@keyframes breathe-halo {
+  0%, 100% { transform: scale(0.95); opacity: 0.55; }
+  50%      { transform: scale(1.25); opacity: 0.15; }
+}
+
+@keyframes breathe-halo-soft {
+  0%, 100% { transform: scale(1.05); opacity: 0.30; }
+  50%      { transform: scale(1.40); opacity: 0.05; }
+}
+
+@keyframes breathe-text {
+  0%, 100% { opacity: 1; }
+  45%, 55% { opacity: 1; }
+  46%      { opacity: 0; }
+  54%      { opacity: 0; }
+}
+
+@keyframes drift {
+  0%   { transform: translate(0, 0); }
+  50%  { transform: translate(8px, -6px); }
+  100% { transform: translate(0, 0); }
+}
+
+.breathe-core  { animation: breathe 9s ease-in-out infinite; }
+.breathe-halo  { animation: breathe-halo 9s ease-in-out infinite; }
+.breathe-halo2 { animation: breathe-halo-soft 9s ease-in-out infinite; }
+.drift-slow    { animation: drift 14s ease-in-out infinite; }
+
 .skeleton {
   background: linear-gradient(90deg, rgb(0 0 0 / 0.04) 25%, rgb(0 0 0 / 0.08) 37%, rgb(0 0 0 / 0.04) 63%);
   background-size: 400% 100%;

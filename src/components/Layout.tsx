@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import MiniPlayer from './MiniPlayer'
+import NowPlaying from './NowPlaying'
 import { usePlayer } from '../contexts/PlayerContext'
 
 export default function Layout() {
@@ -16,13 +17,14 @@ export default function Layout() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <main className={`flex-1 ${current ? 'pb-40' : 'pb-8'}`}>
+      <main className={`flex-1 ${current ? 'pb-24' : 'pb-8'}`}>
         <div key={location.pathname} className="animate-fade-in">
           <Outlet />
         </div>
       </main>
       <Footer />
       <MiniPlayer />
+      <NowPlaying />
     </div>
   )
 }
