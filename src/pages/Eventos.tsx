@@ -57,10 +57,10 @@ export default function Eventos() {
   }
 
   return (
-    <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-8 pb-12">
-      <header className="mb-6 sm:mb-8">
-        <h1 className="text-3xl sm:text-4xl font-semibold mb-2">Eventos</h1>
-        <p className="text-[var(--color-text)]/65 max-w-2xl">
+    <section className="px-5 pt-6 pb-8">
+      <header className="mb-5">
+        <h1 className="text-2xl font-semibold mb-1">Eventos</h1>
+        <p className="text-sm text-[var(--color-text)]/65">
           Encuentros, retiros y sesiones presenciales y online.
         </p>
       </header>
@@ -72,7 +72,7 @@ export default function Eventos() {
       )}
 
       {!error && eventos === null && (
-        <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
+        <div className="space-y-3">
           <CardSkeleton />
           <CardSkeleton />
         </div>
@@ -90,10 +90,10 @@ export default function Eventos() {
 
       {proximos.length > 0 && (
         <>
-          <h2 className="text-xl font-semibold mb-4 mt-2 text-[var(--color-text)]/80">
+          <h2 className="text-lg font-semibold mb-3 mt-1 text-[var(--color-text)]/80">
             Próximos eventos
           </h2>
-          <div className="grid md:grid-cols-2 gap-4 sm:gap-5 mb-12">
+          <div className="space-y-3 mb-8">
             {proximos.map(ev => <EventoCard key={ev.id} ev={ev} grande />)}
           </div>
         </>
@@ -101,8 +101,8 @@ export default function Eventos() {
 
       {pasados.length > 0 && (
         <>
-          <h2 className="text-lg font-semibold mb-3 text-[var(--color-text)]/60">Eventos pasados</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <h2 className="text-base font-semibold mb-2 text-[var(--color-text)]/60">Eventos pasados</h2>
+          <div className="space-y-2">
             {pasados.map(ev => <EventoCard key={ev.id} ev={ev} grande={false} />)}
           </div>
         </>
@@ -121,7 +121,7 @@ function EventoCard({ ev, grande }: { ev: Evento; grande: boolean }) {
           <img src={ev.imagen_url} alt={ev.titulo} loading="lazy" className="w-full h-full object-cover" />
         </div>
       )}
-      <div className={`${grande ? 'p-5 sm:p-6' : 'p-4'} flex flex-col flex-1`}>
+      <div className={`${grande ? 'p-4' : 'p-3'} flex flex-col flex-1`}>
         <div className="text-xs uppercase tracking-wide text-[var(--color-primary)] font-semibold mb-1">
           {fecha}
         </div>
@@ -176,14 +176,14 @@ function NewsletterEmpty({
   mensaje: string
 }) {
   return (
-    <div className="card p-6 sm:p-10 text-center max-w-2xl mx-auto">
-      <h2 className="font-serif text-2xl font-semibold mb-2">
+    <div className="card p-6 text-center">
+      <h2 className="font-serif text-xl font-semibold mb-2">
         Aún no hay eventos próximos
       </h2>
-      <p className="text-[var(--color-text)]/65 mb-6">
+      <p className="text-sm text-[var(--color-text)]/65 mb-5">
         Déjanos tu email y te avisaremos cuando publiquemos nuevas fechas.
       </p>
-      <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+      <form onSubmit={onSubmit} className="flex flex-col gap-2">
         <input
           type="email"
           required

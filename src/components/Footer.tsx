@@ -42,12 +42,13 @@ export default function Footer() {
   ] as const
 
   const whatsappUrl = `https://wa.me/${config.contact.whatsappE164}`
+  const visibleSocials = socials.filter(s => s.url)
 
   return (
-    <footer className="mt-16 border-t border-black/5 bg-white/40">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 grid gap-8 sm:grid-cols-2 md:grid-cols-3">
+    <footer className="mt-12 border-t border-black/5 bg-white/40">
+      <div className="px-5 py-8 space-y-6">
         <div>
-          <h4 className="font-serif text-lg text-[var(--color-primary)] mb-2">
+          <h4 className="font-serif text-base text-[var(--color-primary)] mb-1">
             {config.brand.name}
           </h4>
           <p className="text-sm text-[var(--color-text)]/70 leading-relaxed">
@@ -56,7 +57,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h5 className="text-sm font-semibold mb-3 uppercase tracking-wide text-[var(--color-text)]/60">
+          <h5 className="text-xs font-semibold mb-2 uppercase tracking-wide text-[var(--color-text)]/60">
             Contacto
           </h5>
           <a
@@ -80,36 +81,31 @@ export default function Footer() {
           )}
         </div>
 
-        <div>
-          <h5 className="text-sm font-semibold mb-3 uppercase tracking-wide text-[var(--color-text)]/60">
-            Redes
-          </h5>
-          <div className="flex gap-3">
-            {socials.map(s => (
-              s.url ? (
+        {visibleSocials.length > 0 && (
+          <div>
+            <h5 className="text-xs font-semibold mb-2 uppercase tracking-wide text-[var(--color-text)]/60">
+              Redes
+            </h5>
+            <div className="flex gap-3">
+              {visibleSocials.map(s => (
                 <a
                   key={s.key}
                   href={s.url}
                   target="_blank"
                   rel="noreferrer"
                   aria-label={s.key}
-                  className="w-9 h-9 grid place-items-center rounded-full bg-white text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-colors shadow-sm"
+                  className="w-10 h-10 grid place-items-center rounded-full bg-white text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-colors shadow-sm"
                 >
                   <Icon name={s.key} />
                 </a>
-              ) : null
-            ))}
-            {socials.every(s => !s.url) && (
-              <p className="text-xs text-[var(--color-text)]/50">
-                (Configurar en <code>src/config.ts</code>)
-              </p>
-            )}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="border-t border-black/5">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row justify-between gap-2 text-xs text-[var(--color-text)]/60">
+        <div className="px-5 py-3 flex flex-col gap-1 text-[11px] text-[var(--color-text)]/55">
           <span>© {new Date().getFullYear()} {config.brand.name}</span>
           <a href={config.website} target="_blank" rel="noreferrer" className="hover:text-[var(--color-primary)]">
             {config.website.replace(/^https?:\/\//, '')}

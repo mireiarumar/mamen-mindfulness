@@ -34,15 +34,15 @@ export default function Cursos() {
   }, [cursos, filtro])
 
   return (
-    <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-8 pb-12">
-      <header className="mb-6 sm:mb-8">
-        <h1 className="text-3xl sm:text-4xl font-semibold mb-2">Cursos</h1>
-        <p className="text-[var(--color-text)]/65 max-w-2xl">
+    <section className="px-5 pt-6 pb-8">
+      <header className="mb-5">
+        <h1 className="text-2xl font-semibold mb-1">Cursos</h1>
+        <p className="text-sm text-[var(--color-text)]/65">
           Programas para mejorar el bienestar personal y la cultura de tu organización.
         </p>
       </header>
 
-      <div className="mb-6 flex flex-wrap gap-2">
+      <div className="mb-5 -mx-5 px-5 flex gap-2 overflow-x-auto pb-1">
         <Filtrar activo={filtro === 'todos'} onClick={() => setFiltro('todos')}>Todos</Filtrar>
         <Filtrar activo={filtro === 'particular'} onClick={() => setFiltro('particular')}>Para particulares</Filtrar>
         <Filtrar activo={filtro === 'empresa'} onClick={() => setFiltro('empresa')}>Para empresas</Filtrar>
@@ -54,15 +54,15 @@ export default function Cursos() {
         </div>
       )}
 
-      {!error && cursos === null && <GridSkeleton count={6} />}
+      {!error && cursos === null && <GridSkeleton count={4} />}
 
       {!error && cursos && filtrados.length === 0 && (
-        <div className="card p-8 text-center text-[var(--color-text)]/60">
+        <div className="card p-6 text-center text-[var(--color-text)]/60">
           No hay cursos en esta categoría todavía.
         </div>
       )}
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+      <div className="space-y-3">
         {filtrados.map(c => {
           const mensaje = c.whatsapp_mensaje?.trim() ||
             `Hola Mamen, querría más información sobre el curso "${c.titulo}".`
@@ -79,20 +79,20 @@ export default function Cursos() {
                   />
                 </div>
               )}
-              <div className="p-5 flex flex-col flex-1">
-                <div className="flex items-center gap-2 mb-2 flex-wrap">
+              <div className="p-4 flex flex-col flex-1">
+                <div className="flex items-center gap-2 mb-1.5 flex-wrap">
                   <span className="tag">{c.tipo === 'empresa' ? 'Empresas' : 'Particulares'}</span>
                   <span className="text-xs text-[var(--color-text)]/50">
                     {c.modalidad}{c.duracion ? ` · ${c.duracion}` : ''}
                   </span>
                 </div>
-                <h3 className="font-serif text-lg font-semibold mb-2">{c.titulo}</h3>
+                <h3 className="font-serif text-base font-semibold mb-1">{c.titulo}</h3>
                 {c.descripcion && (
-                  <p className="text-sm text-[var(--color-text)]/70 mb-4 leading-relaxed">
+                  <p className="text-sm text-[var(--color-text)]/70 mb-3 leading-relaxed">
                     {c.descripcion}
                   </p>
                 )}
-                <div className="mt-auto pt-2">
+                <div>
                   <a
                     href={url}
                     target="_blank"

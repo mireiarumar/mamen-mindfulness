@@ -13,39 +13,20 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-30 bg-[var(--color-bg)]/85 backdrop-blur border-b border-black/5">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-baseline gap-2 group" onClick={() => setOpen(false)}>
-          <span className="font-serif text-lg sm:text-xl font-semibold text-[var(--color-primary)]">
+    <header className="sticky top-0 z-30 bg-[var(--color-bg)]/90 backdrop-blur border-b border-black/5">
+      <div className="px-4 h-14 flex items-center justify-between">
+        <Link to="/" className="flex items-baseline gap-1.5 min-w-0" onClick={() => setOpen(false)}>
+          <span className="font-serif text-base font-semibold text-[var(--color-primary)] truncate">
             {config.brand.name}
           </span>
-          <span className="hidden sm:inline text-sm text-[var(--color-text)]/60">
+          <span className="text-[11px] text-[var(--color-text)]/60 whitespace-nowrap">
             · {config.brand.tagline}
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-1">
-          {links.map(l => (
-            <NavLink
-              key={l.to}
-              to={l.to}
-              end={l.to === '/'}
-              className={({ isActive }) =>
-                `px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  isActive
-                    ? 'text-[var(--color-primary)] bg-[var(--color-primary)]/10'
-                    : 'text-[var(--color-text)]/70 hover:text-[var(--color-primary)] hover:bg-[var(--color-primary)]/5'
-                }`
-              }
-            >
-              {l.label}
-            </NavLink>
-          ))}
-        </nav>
-
         <button
           aria-label="Menú"
-          className="md:hidden p-2 rounded-lg hover:bg-black/5"
+          className="p-2 -mr-2 rounded-lg hover:bg-black/5"
           onClick={() => setOpen(o => !o)}
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -66,8 +47,8 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <nav className="md:hidden border-t border-black/5 bg-[var(--color-bg)]">
-          <div className="max-w-6xl mx-auto px-4 py-2 flex flex-col">
+        <nav className="border-t border-black/5 bg-[var(--color-bg)]">
+          <div className="px-4 py-2 flex flex-col">
             {links.map(l => (
               <NavLink
                 key={l.to}

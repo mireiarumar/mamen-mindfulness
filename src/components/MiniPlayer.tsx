@@ -8,8 +8,8 @@ export default function MiniPlayer() {
   const progress = p.duration > 0 ? (p.currentTime / p.duration) * 100 : 0
 
   return (
-    <div className="fixed bottom-0 inset-x-0 z-40 px-2 sm:px-4 pb-2 sm:pb-4 pointer-events-none">
-      <div className="max-w-3xl mx-auto pointer-events-auto bg-white shadow-[0_-4px_24px_-4px_rgba(0,0,0,0.15)] rounded-2xl border border-black/5 animate-fade-in">
+    <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] z-40 px-2 pb-2 pointer-events-none">
+      <div className="pointer-events-auto bg-white shadow-[0_-4px_24px_-4px_rgba(0,0,0,0.15)] rounded-2xl border border-black/5 animate-fade-in">
         <div className="px-4 sm:px-5 pt-3 pb-2">
           <div className="flex items-center gap-3">
             <div className="min-w-0 flex-1">

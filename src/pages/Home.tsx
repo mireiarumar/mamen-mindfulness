@@ -30,69 +30,59 @@ export default function Home() {
 
   return (
     <>
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-8 sm:pt-14 pb-12 sm:pb-20">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-          <div>
-            <span className="tag mb-4">Mindfulness · Liderazgo consciente</span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl leading-tight font-semibold mb-4">
-              Gestión emocional y mindfulness para entornos de alta presión
-            </h1>
-            <p className="text-base sm:text-lg text-[var(--color-text)]/70 leading-relaxed mb-6">
-              Ingeniera. Experta en estrés y liderazgo consciente. Sin espiritualidad innecesaria.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link to="/meditaciones" className="btn-primary">
-                Empezar a meditar
-              </Link>
-              <Link to="/cursos" className="btn-ghost">
-                Ver cursos
-              </Link>
-            </div>
-          </div>
-
-          <div className="order-first md:order-last">
-            <div className="relative aspect-[4/5] max-w-sm mx-auto rounded-3xl overflow-hidden shadow-card">
-              <img
-                src={config.heroImageUrl}
-                alt={`${config.brand.name}`}
-                loading="eager"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)]/20 to-transparent" />
-            </div>
-          </div>
+      <section className="px-5 pt-6 pb-8">
+        <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-card mb-6">
+          <img
+            src={config.heroImageUrl}
+            alt={config.brand.name}
+            loading="eager"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <span className="tag mb-3">Mindfulness · Liderazgo consciente</span>
+        <h1 className="text-2xl leading-tight font-semibold mb-3 mt-2">
+          Gestión emocional y mindfulness para entornos de alta presión
+        </h1>
+        <p className="text-base text-[var(--color-text)]/70 leading-relaxed mb-5">
+          Ingeniera. Experta en estrés y liderazgo consciente. Sin espiritualidad innecesaria.
+        </p>
+        <div className="flex flex-col gap-2">
+          <Link to="/meditaciones" className="btn-primary text-center">
+            Empezar a meditar
+          </Link>
+          <Link to="/cursos" className="btn-ghost text-center">
+            Ver cursos
+          </Link>
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-12 sm:pb-16">
-        <div className="grid sm:grid-cols-3 gap-4 sm:gap-5">
-          <QuickAccessCard
-            to="/meditaciones"
-            title="Meditaciones"
-            description="Audios guiados para practicar en cualquier momento."
-            color="primary"
-          />
-          <QuickAccessCard
-            to="/cursos"
-            title="Cursos"
-            description="Programas para particulares y para empresas."
-            color="accent"
-          />
-          <QuickAccessCard
-            to="/eventos"
-            title="Eventos"
-            description="Próximos encuentros, retiros y sesiones."
-            color="primary-light"
-          />
-        </div>
+      <section className="px-5 pb-8 space-y-3">
+        <QuickAccessCard
+          to="/meditaciones"
+          title="Meditaciones"
+          description="Audios guiados para cualquier momento."
+          color="primary"
+        />
+        <QuickAccessCard
+          to="/cursos"
+          title="Cursos"
+          description="Para particulares y para empresas."
+          color="accent"
+        />
+        <QuickAccessCard
+          to="/eventos"
+          title="Eventos"
+          description="Próximos encuentros y sesiones."
+          color="primary-light"
+        />
       </section>
 
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-16 sm:pb-24">
-        <div className="flex items-end justify-between mb-6">
+      <section className="px-5 pb-12">
+        <div className="flex items-end justify-between mb-4">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-semibold mb-1">Meditaciones recientes</h2>
+            <h2 className="text-xl font-semibold mb-0.5">Meditaciones recientes</h2>
             <p className="text-sm text-[var(--color-text)]/60">
-              Elige la que mejor encaje con tu momento.
+              Elige la que encaje con tu momento.
             </p>
           </div>
           <Link
@@ -110,24 +100,24 @@ export default function Home() {
         )}
 
         {!error && destacadas === null && (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-            {Array.from({ length: 6 }).map((_, i) => <CardSkeleton key={i} />)}
+          <div className="space-y-3">
+            {Array.from({ length: 4 }).map((_, i) => <CardSkeleton key={i} />)}
           </div>
         )}
 
         {!error && destacadas && destacadas.length === 0 && (
-          <div className="card p-8 text-center text-[var(--color-text)]/60">
+          <div className="card p-6 text-center text-[var(--color-text)]/60">
             Aún no hay meditaciones publicadas.
           </div>
         )}
 
         {!error && destacadas && destacadas.length > 0 && (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          <div className="space-y-3">
             {destacadas.map(m => {
               const isCurrent = current?.id === m.id
               return (
-                <article key={m.id} className="card p-5 flex flex-col">
-                  <div className="flex items-start justify-between gap-2 mb-2">
+                <article key={m.id} className="card p-4 flex flex-col">
+                  <div className="flex items-start justify-between gap-2 mb-1.5">
                     <span className="tag">{m.categoria}</span>
                     {m.duracion_minutos != null && (
                       <span className="text-xs text-[var(--color-text)]/50">
@@ -135,13 +125,13 @@ export default function Home() {
                       </span>
                     )}
                   </div>
-                  <h3 className="font-serif text-lg font-semibold mb-2">{m.titulo}</h3>
+                  <h3 className="font-serif text-base font-semibold mb-1">{m.titulo}</h3>
                   {m.descripcion && (
-                    <p className="text-sm text-[var(--color-text)]/70 mb-4 line-clamp-3">
+                    <p className="text-sm text-[var(--color-text)]/70 mb-3 line-clamp-2">
                       {m.descripcion}
                     </p>
                   )}
-                  <div className="mt-auto">
+                  <div>
                     <button
                       onClick={() => (isCurrent ? toggle() : play(m))}
                       className="btn-primary inline-flex items-center gap-2"
@@ -190,18 +180,20 @@ function QuickAccessCard({
   return (
     <Link
       to={to}
-      className="card p-6 hover:shadow-md transition-shadow group"
+      className="card p-4 hover:shadow-md transition-shadow group flex items-center gap-4"
     >
-      <div className={`w-10 h-10 rounded-xl mb-4 grid place-items-center ${colorMap[color]}`}>
+      <div className={`w-10 h-10 rounded-xl grid place-items-center shrink-0 ${colorMap[color]}`}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <line x1="5" y1="12" x2="19" y2="12" />
           <polyline points="12 5 19 12 12 19" />
         </svg>
       </div>
-      <h3 className="font-serif text-xl font-semibold mb-1 group-hover:text-[var(--color-primary)] transition-colors">
-        {title}
-      </h3>
-      <p className="text-sm text-[var(--color-text)]/65">{description}</p>
+      <div className="min-w-0 flex-1">
+        <h3 className="font-serif text-base font-semibold mb-0.5 group-hover:text-[var(--color-primary)] transition-colors">
+          {title}
+        </h3>
+        <p className="text-sm text-[var(--color-text)]/65">{description}</p>
+      </div>
     </Link>
   )
 }

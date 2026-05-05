@@ -12,7 +12,7 @@ export function CardSkeleton() {
 
 export function GridSkeleton({ count = 6 }: { count?: number }) {
   return (
-    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+    <div className="space-y-3">
       {Array.from({ length: count }).map((_, i) => (
         <CardSkeleton key={i} />
       ))}

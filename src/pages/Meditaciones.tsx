@@ -44,15 +44,15 @@ export default function Meditaciones() {
   }, [cats, meds])
 
   return (
-    <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-8 pb-12">
-      <header className="mb-6 sm:mb-8">
-        <h1 className="text-3xl sm:text-4xl font-semibold mb-2">Meditaciones</h1>
-        <p className="text-[var(--color-text)]/65 max-w-2xl">
+    <section className="px-5 pt-6 pb-8">
+      <header className="mb-5">
+        <h1 className="text-2xl font-semibold mb-1">Meditaciones</h1>
+        <p className="text-sm text-[var(--color-text)]/65">
           Audios guiados para practicar mindfulness en cualquier momento del día.
         </p>
       </header>
 
-      <div className="mb-6 flex flex-col sm:flex-row gap-3">
+      <div className="mb-4">
         <div className="relative flex-1">
           <svg
             width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -72,7 +72,7 @@ export default function Meditaciones() {
         </div>
       </div>
 
-      <div className="mb-6 -mx-1 flex flex-wrap gap-2">
+      <div className="mb-5 -mx-5 px-5 flex gap-2 overflow-x-auto pb-1 scrollbar-thin">
         <CategoriaChip activa={filtro === 'todas'} onClick={() => setFiltro('todas')}>
           Todas
         </CategoriaChip>
@@ -89,22 +89,22 @@ export default function Meditaciones() {
         </div>
       )}
 
-      {!error && meds === null && <GridSkeleton count={9} />}
+      {!error && meds === null && <GridSkeleton count={6} />}
 
       {!error && meds && filtradas.length === 0 && (
-        <div className="card p-8 text-center text-[var(--color-text)]/60">
+        <div className="card p-6 text-center text-[var(--color-text)]/60">
           No hay meditaciones que coincidan con tu búsqueda.
         </div>
       )}
 
       {filtradas.length > 0 && (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="space-y-3">
           {filtradas.map(m => {
             const isCurrent = current?.id === m.id
             const playing = isCurrent && isPlaying
             return (
-              <article key={m.id} className="card p-5 flex flex-col">
-                <div className="flex items-start justify-between gap-2 mb-2">
+              <article key={m.id} className="card p-4 flex flex-col">
+                <div className="flex items-start justify-between gap-2 mb-1.5">
                   <span className="tag">{nombreCategoria(m.categoria, categoriasMostradas)}</span>
                   {m.duracion_minutos != null && (
                     <span className="text-xs text-[var(--color-text)]/50">
@@ -112,13 +112,13 @@ export default function Meditaciones() {
                     </span>
                   )}
                 </div>
-                <h3 className="font-serif text-lg font-semibold mb-2">{m.titulo}</h3>
+                <h3 className="font-serif text-base font-semibold mb-1">{m.titulo}</h3>
                 {m.descripcion && (
-                  <p className="text-sm text-[var(--color-text)]/70 mb-4 line-clamp-3">
+                  <p className="text-sm text-[var(--color-text)]/70 mb-3 line-clamp-2">
                     {m.descripcion}
                   </p>
                 )}
-                <div className="mt-auto pt-2">
+                <div>
                   <button
                     onClick={() => (isCurrent ? toggle() : play(m))}
                     className={`btn-primary inline-flex items-center gap-2 ${playing ? 'bg-[var(--color-primary)]/85' : ''}`}

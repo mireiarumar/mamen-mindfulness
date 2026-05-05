@@ -19,8 +19,25 @@
 
 html, body, #root {
   min-height: 100%;
-  background-color: var(--color-bg);
   color: var(--color-text);
+}
+
+/* App con ancho fijo de movil. En desktop aparece centrada con un fondo neutro alrededor. */
+html, body {
+  background-color: #EAE5DD;
+}
+
+#root {
+  max-width: 480px;
+  margin-inline: auto;
+  background-color: var(--color-bg);
+  min-height: 100vh;
+  box-shadow: 0 0 24px -8px rgb(0 0 0 / 0.08);
+}
+
+@media (max-width: 480px) {
+  #root { box-shadow: none; }
+  html, body { background-color: var(--color-bg); }
 }
 
 body {
